@@ -1,0 +1,242 @@
+
+<html>
+  <head>
+    <!--Load the AJAX API-->
+    <script type="text/html" src="https://www.gstatic.com/charts/loader.js"></script>
+    
+    <!--script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHnTVMSYS2AHgm5fzP3GKzhsTNf9srRIE&libraries=visualization"></script-->
+    <!--
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    -->
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    
+    
+<script type="text/html">
+      /*
+        call getData when charts lib is loaded;  
+        call drawChart when AJAX data is returned
+
+      */
+      
+      // draw chart
+      function getData () {
+        
+     $.ajax({
+     //url: "https://data.cityofchicago.org/resource/787j-mys9.json?$query=SELECT%20zip,status%20ORDER%20BY%20zip",
+
+     //url: "https://data.cityofchicago.org/resource/787j-mys9.json?$select=zip&$where=status%3E=%27open%27,
+     
+     url: "https://data.cityofchicago.org/resource/787j-mys9.json?$query=SELECT%20community_area,%20count(community_area)%20WHERE%20status=%27Open%27%20GROUP%20by%20community_area%20ORDER%20BY%20count(community_area)",
+     
+     type: "GET",
+     data: {
+         "$limit" : 500000 
+     }
+     }).done(function(data) {
+          //alert("Retrieved " + data.length + " records from the dataset!");
+          //alert(test);
+          console.log(data);
+          
+        $.each(data, function(i)
+        
+        {
+          var status = data[i].status;
+          var zip = data[i].zip;
+          var latitude = data[i].latitude;
+          var longitude = data[i].longitude;
+          
+        }
+        
+      // loading the visualization API
+      google.charts.load("current", {packages:["corechart"]});
+      
+      // sets a callback
+      google.charts.setOnLoadCallback(drawChart);
+      
+      
+      function drawChart(data) {
+        var data = google.visualization.DataTable([
+        data.addColumn('string', 'zip');
+        data.addColumn('number', 'number of potholes');
+
+ /*         
+          ['Task', 'Hours per Day'],
+          ['Work',     11],
+          ['Eat',      2],
+          ['Commute',  2],
+          ['Watch TV', 2],
+          ['Sleep',    7]
+        ]);
+*/
+      
+        $.each(apiData, function(i,v) {
+        data.addRow([v.zip, parseFloat(v.sum_potholes)]);
+        })
+        
+        var options = {
+          title: 'Number of Potholes per area',
+          pieHole: 0.4,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+        chart.draw(data, options);
+      }
+        
+        );
+   
+
+   
+      //data table
+      
+      google.charts.load('current', {'packages':['table']});
+      google.charts.setOnLoadCallback(drawTable);
+
+      function drawTable(data) {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Zip');
+        data.addColumn('number', 'Potholes');
+        //data.addColumn('boolean', '');
+        /*
+        data.addRows([
+          ['Mike',  {v: 10000, f: '$10,000'}, true],
+          ['Jim',   {v:8000,   f: '$8,000'},  false],
+          ['Alice', {v: 12500, f: '$12,500'}, true],
+          ['Bob',   {v: 7000,  f: '$7,000'},  true]
+        ]);
+        */
+        
+        var table = new google.visualization.Table(document.getElementById('table_div'));
+
+        table.draw(data, {showRowNumber: true, width: '100%', height: '100%'});
+      }
+      </script>
+  
+      //heat map
+      
+    <meta charset="utf-8">
+    <title>Heatmaps</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #floating-panel {
+        position: absolute;
+        top: 10px;
+        left: 25%;
+        z-index: 5;
+        background-color: #fff;
+        padding: 5px;
+        border: 1px solid #999;
+        text-align: center;
+        font-family: 'Roboto','sans-serif';
+        line-height: 30px;
+        padding-left: 10px;
+      }
+      #floating-panel {
+        background-color: #fff;
+        border: 1px solid #999;
+        left: 25%;
+        padding: 5px;
+        position: absolute;
+        top: 10px;
+        z-index: 5;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="floating-panel">
+      <button onclick="toggleHeatmap()">Toggle Heatmap</button>
+      <button onclick="changeGradient()">Change gradient</button>
+      <button onclick="changeRadius()">Change radius</button>
+      <button onclick="changeOpacity()">Change opacity</button>
+    </div>
+    <div id="map"></div>
+    <script>
+
+      // This example requires the Visualization library. Include the libraries=visualization
+      // parameter when you first load the API. For example:
+      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=visualization">
+
+      var map, heatmap;
+
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 13,
+          center: {lat: 37.775, lng: -122.434},
+          mapTypeId: 'satellite'
+        });
+
+        heatmap = new google.maps.visualization.HeatmapLayer({
+          data: getPoints(),
+          map: map
+        });
+      }
+
+      function toggleHeatmap() {
+        heatmap.setMap(heatmap.getMap() ? null : map);
+      }
+
+      function changeGradient() {
+        var gradient = [
+          'rgba(0, 255, 255, 0)',
+          'rgba(0, 255, 255, 1)',
+          'rgba(0, 191, 255, 1)',
+          'rgba(0, 127, 255, 1)',
+          'rgba(0, 63, 255, 1)',
+          'rgba(0, 0, 255, 1)',
+          'rgba(0, 0, 223, 1)',
+          'rgba(0, 0, 191, 1)',
+          'rgba(0, 0, 159, 1)',
+          'rgba(0, 0, 127, 1)',
+          'rgba(63, 0, 91, 1)',
+          'rgba(127, 0, 63, 1)',
+          'rgba(191, 0, 31, 1)',
+          'rgba(255, 0, 0, 1)'
+        ]
+        heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
+      }
+
+      function changeRadius() {
+        heatmap.set('radius', heatmap.get('radius') ? null : 20);
+      }
+
+      function changeOpacity() {
+        heatmap.set('opacity', heatmap.get('opacity') ? null : 0.2);
+      }
+
+      // Heatmap data: 500 Points
+      function getPoints(data) {
+        return [
+          
+          new google.maps.LatLng(41.742348937666875, -87.57994180132978)
+          //new google.maps.LatLng(data[i].latitude, data[i].longitude)
+
+ 
+        ];
+      }
+    </script>
+    
+    <script async defer
+     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHnTVMSYS2AHgm5fzP3GKzhsTNf9srRIE&libraries=visualization&callback=initMap">
+    </script>
+  
+     });      
+  
+  }
+
+
+  <body>
+    <!--Div that will hold the pie chart-->
+    <div id="chart_div"></div>
+  </body>
+</html>
