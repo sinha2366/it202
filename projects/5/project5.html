@@ -1,0 +1,111 @@
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+<html>
+  <head>
+    <style>
+      h1 {
+      color: green;
+      font-family: verdana;
+      font-size: 300%;
+      }
+      h2 {
+      color: gray;
+      font-family: verdana;
+      font-size: 100%;
+      }
+      p  {
+          color: red;
+          font-family: monospace;
+          font-size: 260%;
+      }
+    </style>
+  </head>
+<!-- Simple header with scrollable tabs. -->
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+      <!-- Title -->
+      <span class="mdl-layout-title">Estimated Populations</span>
+    </div>
+    <!-- Tabs -->
+    <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+      <a href="#scroll-tab-1" class="mdl-layout__tab is-active">China</a>
+      <a href="#scroll-tab-2" class="mdl-layout__tab">India</a>
+      <a href="#scroll-tab-3" class="mdl-layout__tab">United States</a>
+      <a href="#scroll-tab-4" class="mdl-layout__tab">Indonesia</a>
+      <a href="#scroll-tab-5" class="mdl-layout__tab">Brazil</a>
+      <a href="#scroll-tab-6" class="mdl-layout__tab">About</a>
+    </div>
+  </header>
+  <div class="mdl-layout__drawer">
+    <span class="mdl-layout-title">2050 Populations</span>
+  </div>
+  <main class="mdl-layout__content">
+    
+    <section class="mdl-layout__tab-panel is-active" id="scroll-tab-1">
+      <div class="page-content">
+        <br>
+        <p>Expected population of China by 2050: <strong><h1> 1,301,627,048 </h1></strong>
+        </p>
+      </div>
+    </section>
+    
+    <section class="mdl-layout__tab-panel" id="scroll-tab-2">
+      <div class="page-content">
+        <br>
+        <p>Expected population of India by 2050: <strong><h1> 1,656,553,632 </h1></strong>
+        </p>
+      </div>
+    </section>
+    
+    <section class="mdl-layout__tab-panel" id="scroll-tab-3">
+      <div class="page-content">
+        <br>
+        <p>Expected population of United States by 2050: <strong><h1> 398,328,349 </h1></strong>
+        </p>
+      </div>
+    </section>
+    
+    <section class="mdl-layout__tab-panel" id="scroll-tab-4">
+      <div class="page-content">
+        <br>
+        <p>Expected population of Indonesia by 2050: <strong><h1> 300,183,166 </h1></strong> 
+        </p>
+      </div>
+    </section>
+    
+    <section class="mdl-layout__tab-panel" id="scroll-tab-5">
+      <div class="page-content">
+        <br>
+        <p>Expected population of Brazil by 2050: <strong><h1> 232,304,177 </h1></strong>
+        </p>
+      </div>
+    </section>
+    <section class="mdl-layout__tab-panel" id="scroll-tab-6">
+      <div class="page-content">
+      <p><h2><center>
+      Hi,  <br>
+      I'm Aditya and I currently attend the University of Illinois at Chicago. <br>
+      This application utilizes a MD Lite layout and lists the top five countries <br>
+      along with the estimated population of that country by 2050. <br>
+      </center></h2></p>
+      </div>
+    </section>
+  </main>
+</div>
+
+
+
+</html>
+
+
+<script>
+if('serviceWorker' in navigator) {
+  navigator.serviceWorker
+           .register('/sw.js')
+           .then(function() { console.log("Service Worker Registered"); });
+}
+</script>
