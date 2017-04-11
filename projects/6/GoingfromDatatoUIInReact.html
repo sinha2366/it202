@@ -50,7 +50,8 @@ var colors = ["#393E41", "#E94F37", "#1C89BF", "#A1D363",
 var renderData = [];
  
 for (var i = 0; i < colors.length; i++) {
-  renderData.push(<Circle bgColor={colors[i]}/>);
+  var color = colors[i];
+  renderData.push(<Circle key={i + color} bgColor={color}/>);
 }
   var ran = Math.floor(Math.random() * colors.length);
  
@@ -60,9 +61,16 @@ for (var i = 0; i < colors.length; i++) {
     ReactDOM.render(
       <div>
     
+  
     {showCircle()}
     {showCircle()}
     {showCircle()}
+    {showCircle()}
+    {showCircle()}
+    {showCircle()}
+    {showCircle()}
+    {showCircle()}
+    
       </div>,
       destination
     );
