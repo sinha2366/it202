@@ -1,0 +1,126 @@
+<!--
+// Aditya Sinha
+// IT 202 - Final Project
+//
+// References used: 
+// - https://developer.spotify.com/web-api/
+// - https://youtu.be/eV3WkDAM3Hw
+// - https://www.martin-brennan.com/es6-basics/
+//
+// **index.html**
+// 
+-->
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <!--Load the AJAX API-->
+    <script type="text/html" src="https://www.gstatic.com/charts/loader.js"></script>
+    
+    <!--script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHnTVMSYS2AHgm5fzP3GKzhsTNf9srRIE&libraries=visualization"></script-->
+    <!--
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    -->
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<html>
+        <style>
+
+      h2 {
+      color: gray;
+      font-family: verdana;
+      font-size: 100%;
+      }
+
+    </style>
+
+<!-- Simple header with scrollable tabs. -->
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+      <!-- Title -->
+      <span class="mdl-layout-title">Spotify Playlist Generator</span>
+    </div>
+    <!-- Tabs -->
+    <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+      <a href="#scroll-tab-1" class="mdl-layout__tab is-active">Playlists</a>
+      <a href="#scroll-tab-2" class="mdl-layout__tab">Graph</a>
+
+      <a href="#scroll-tab-6" class="mdl-layout__tab">About</a>
+    </div>
+  </header>
+  <div class="mdl-layout__drawer">
+    <!--<span class="mdl-layout-title">2050 Populations</span>-->
+  </div>
+  <main class="mdl-layout__content">
+    
+    <section class="mdl-layout__tab-panel is-active" id="scroll-tab-1">
+      <div class="page-content">
+<head>
+	<meta charset="UTF-8">
+	<title>Spotify</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<main class="main-container">
+		<section>
+			<div class="form">
+				<img src="https://lh3.googleusercontent.com/UrY7BAZ-XfXGpfkeWg0zCCeo-7ras4DCoRalC_WXXWTK9q5b0Iw7B0YQMsVxZaNB7DM=w300" 
+					 alt="some_text" style="width:width;height:height;">	
+				<p> </br>	</p>
+				<form action="">
+					<!--takes the user input - artist names-->
+					<!--<input type="search" value="ghost, muse">-->
+					<input type="search" value="">
+					<!--enter button-->
+					<input type="submit" value="Enter">
+				</form>
+			</div>
+			<div class="playlist">
+				<div class="loader">
+					<div class="inner-circle"> </div>
+				</div>
+			</div>
+		</section>
+	</main>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="script-complete.js"></script>
+</body>
+      </div>
+    </section>
+    
+    <section class="mdl-layout__tab-panel" id="scroll-tab-2">
+      <div class="page-content">
+        <br>
+        <p>This is a graph based on artist popularity<strong>
+            <!--<h1> 1,656,553,632 </h1></strong>-->
+        </p>
+      </div>
+    </section>
+
+    <section class="mdl-layout__tab-panel" id="scroll-tab-6">
+      <div class="page-content">
+      <p><h2><center>
+      Hi,  <br>
+      I'm Aditya and I currently attend the University of Illinois at Chicago. <br> <br>
+      This application utilizes a MD Lite layout and generates a playlist based on the artists provided by the user (on the "playlist" tab)<br>
+      and displays a graph based on the artists' popularity (on the "graph" tab)<br>
+      </center></h2></p>
+      </div>
+    </section>
+  </main>
+</div>
+
+
+
+</html>
+
+
+<script>
+if('serviceWorker' in navigator) {
+  navigator.serviceWorker
+           .register('/sw.js')
+           .then(function() { console.log("Service Worker Registered"); });
+}
+</script>

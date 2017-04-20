@@ -1,0 +1,5 @@
+User testing and user feedback:
+
+The original project was supposed to not only create a playlist based on selected artists, but also create additional screens that utilize other functionalities of the Spotify API. 
+One of these was a music visualizer that would activate whenever the app sense music playing from the spotify playlist that was just created. Another feature was to list a certain albums tracks by the number of times it was listened to. However, after user testing, it was determined that these functionalities didn't work and were therefore scraped. Instead there was just 
+one main goal and that was to build a random playlist based on the artists provided by the user. 
